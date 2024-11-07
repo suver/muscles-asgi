@@ -102,9 +102,7 @@ class Watchdog:
         package = '.'.join(str(config.get('handler')).split('.')[:-1])
         handler = '.'.join(str(config.get('handler')).split('.')[-1:])
         if importlib.util.find_spec(package) is not None:
-            print('-----------importlib.import_module>', package)
             package = importlib.import_module(package, package=None)
-            print('-----------package, handler>', package, handler)
             if hasattr(package, handler):
                 handler = getattr(package, handler)
                 event_handler = handler(**config.get('config'))
